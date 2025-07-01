@@ -1,4 +1,4 @@
-import { FormValues } from '@/pages';
+
 import { query } from '../../../lib/db'; // Adjust path if needed
 import type { NextApiRequest, NextApiResponse } from "next";
 import { TableRow } from '@/models/Database';

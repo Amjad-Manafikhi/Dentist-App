@@ -1,7 +1,5 @@
 import Layout from "@/components/Layout";
-import Element from "@/components/Element";
 import { GetServerSideProps } from "next";
-import {useState} from "react";
 import {d_sInput} from '../../components/FormInput';
 import Table from "@/components/Table";
 import { TableRow } from "@/models/Database";

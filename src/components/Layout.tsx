@@ -1,6 +1,6 @@
-import { ReactHTMLElement, ReactNode, useState } from "react";
-import { Footer } from "./Footer";
-import { SidebarProvider, SidebarTrigger } from "./ui/sidebar";
+import { ReactNode, useState } from "react";
+
+import { SidebarProvider } from "./ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import Navbar from "./Navbar";
 import Form from "./Form";
@@ -62,7 +62,7 @@ function getInitialValues<T extends TableRow>(head: InputType[]): T { // Correct
                 <div className={`flex flex-col min-h-screen `}>
                     <div className="flex flex-col w-full">
                         <div className="flex flex-col mt-10 ml-10">
-                          <h2 className="text-xl font-extrabold"> {lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1)} Management </h2>
+                          <h2 className="text-xl font-extrabold"> {lastSegment ?  lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) : null} Management </h2>
                           <h2 className="text-lg ">Manage dental education {lastSegment}s and curriculum</h2>
                         </div>
                         {children}

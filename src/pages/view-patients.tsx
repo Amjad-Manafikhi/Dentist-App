@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout";
 import Element from "@/components/Element";
 import { GetServerSideProps } from "next";
-import {useState} from "react";
 import {patientInput} from './../components/FormInput';
 import { TableRow } from "@/models/Database";
 type Props ={

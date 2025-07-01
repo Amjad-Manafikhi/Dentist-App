@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { TableRow } from "@/models/Database";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import {patientInput, inputMap} from './FormInput'
+import {inputMap} from './FormInput'
 type ElementProps={
     element:TableRow;
     head:string[];
@@ -32,7 +32,6 @@ function Element({element, head}:ElementProps) {
 
   const [openEdit, setOpenEdit] = useState(false);
   const [editFormValues, setEditFormValues] = useState(()=>initialValues())
-  const [isDeleting, setisDeleting]=useState(false);
   const [idToEdit, setIdToEdit] = useState(-1);
   const router = useRouter();
   const match = router.pathname.match(/[^/]+$/);
@@ -90,11 +89,6 @@ function Element({element, head}:ElementProps) {
     <>
       <tr
         ref={rowRef}
-        style={{
-          animation: isDeleting
-            ? "fadeOut 0.2s ease-in forwards  "
-            : "fadeIn 0.2s ease-out forwards ",
-        }}
       >
         {head.map((column, colIndex) => (
               <td key={colIndex}>

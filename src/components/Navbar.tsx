@@ -1,12 +1,8 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { FaTooth } from "react-icons/fa";
 import { SidebarTrigger } from './ui/sidebar';
 
 export const Navbar = () =>{
     
-    const router= useRouter();
-    const route=router.pathname;
 
     
     

@@ -25,7 +25,7 @@ export default async function handler(
       console.log(newRow)
       const result = await query(
       'UPDATE `case` SET student_id = ?, patient_id = ?, d_s_id = ?, toothache_id = ?, isTreated = ? WHERE id = ?',
-      [student_id, patient_id, d_s_id, toothache_id, isTreated]
+      [student_id, patient_id, d_s_id, toothache_id, isTreated, id]
       );
 
       res.status(200).json({

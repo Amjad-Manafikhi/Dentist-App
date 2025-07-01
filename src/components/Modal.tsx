@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Form from "./Form";
 import {
   Dialog,
   DialogContent,
@@ -29,7 +28,7 @@ export default function Modal({children, open, setOpen, addRow}:Props){
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>
-                                    {addRow ? "Add" : "Edit"} {lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1)} 
+                                    {addRow ? "Add" : "Edit"} {lastSegment ? lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) : null} 
                                 </DialogTitle>
                             </DialogHeader>
                             {children}

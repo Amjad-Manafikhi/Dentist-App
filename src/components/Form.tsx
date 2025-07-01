@@ -9,13 +9,7 @@ type Props={
     setFormValues:React.Dispatch<React.SetStateAction<TableRow>>;
     idToEdit?:number;
 }
-const intialFormValues={
-  firstName:"",
-  secondName:"",
-  email:"",
-  age:0,
-  illness:"",
-}
+
 
 export default function Form({tableInputs, idToEdit, formValues, setFormValues}:Props){
     
