@@ -1,0 +1,35 @@
+import { query } from '../../../lib/db'; // Adjust path if needed
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<{ message: string; result?: any; error?: string }>
+) {
+  if (req.method === 'DELETE') {
+    const { id } = req.body;
+
+    // Check if ID is present
+    if (!id) {
+      return res.status(400).json({ message: 'Missing P_C ID' });
+    }
+
+    try {
+      // SQL query to delete a P_C record by ID
+      const result = await query('DELETE FROM p_c WHERE id = ?', [id]);
+
+      res.status(200).json({
+        message: 'P_C record deleted successfully',
+        result,
+      });
+    } catch (error: any) {
+      console.error('Error deleting P_C record:', error);
+      res.status(500).json({
+        message: 'Error deleting P_C record',
+        error: error.message,
+      });
+    }
+  } else {
+    res.setHeader('Allow', ['DELETE']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}

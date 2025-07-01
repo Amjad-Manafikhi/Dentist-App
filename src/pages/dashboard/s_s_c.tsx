@@ -1,0 +1,60 @@
+import Layout from "@/components/Layout";
+import Element from "@/components/Element";
+import { GetServerSideProps } from "next";
+import {useState} from "react";
+import {s_s_cInput} from '../../components/FormInput';
+import Table from "@/components/Table";
+import { TableRow } from "@/models/Database";
+type Props ={
+    s_s_c:TableRow[]
+}
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+    try{
+        const res = await fetch('http://localhost:3000/api/s_s_c/read');
+        console.log(res);
+        if (!res.ok) {
+            return {
+                props: {
+                    s_s_c: []
+                },
+            };
+        }
+        const s_s_c:TableRow[]=await res.json();
+        
+        return{
+            props:{
+                s_s_c:s_s_c,
+            }
+        }
+    }
+    catch(error){
+        console.log(error);
+        return{
+            props:{
+                s_s_c:[]
+            }
+        }
+    }
+}
+    
+export default function s_s_c({s_s_c}:Props){
+        
+
+    return(
+        <div className="min-h-screen">
+            <Layout head={s_s_cInput}>
+
+                <main  className="pt-20 p-7  flex-grow">
+                    
+                    <Table 
+                        head={
+                            s_s_cInput.map(input => input.name)
+                        }
+                        body={s_s_c}
+                    /> 
+                </main>
+            </Layout>
+        </div>
+    ) 
+}

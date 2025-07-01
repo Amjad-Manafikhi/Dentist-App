@@ -2,30 +2,29 @@ import Layout from "@/components/Layout";
 import Element from "@/components/Element";
 import { GetServerSideProps } from "next";
  import {useState} from "react";
-import {sessionInput} from './../components/FormInput';
+import {casesInput} from './../../components/FormInput';
 import Table from "@/components/Table";
-import { AddSession, TableRow } from "@/models/Database";
-import AddSessionForm from './../components/AddSessionForm';
+import { TableRow } from "@/models/Database";
 type Props ={
-    session:TableRow[]
+    cases:TableRow[]
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     try{
-        const res = await fetch('http://localhost:3000/api/session/read');
+        const res = await fetch('http://localhost:3000/api/cases/read');
         console.log(res);
         if (!res.ok) {
             return {
                 props: {
-                    session: []
+                    cases: []
                 },
             };
         }
-        const session:TableRow[]=await res.json();
+        const cases:TableRow[]=await res.json();
         
         return{
             props:{
-                session:session,
+                cases:cases,
             }
         }
     }
@@ -33,30 +32,27 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
         console.log(error);
         return{
             props:{
-                session:[]
+                cases:[]
             }
         }
     }
 }
     
-export default function Session({session}:Props){
-  
-  const [formValues, setFormValues]=useState<AddSession>({student_id:0,case_id:0,course_id:0,materials:[]});
+export default function Casess({cases}:Props){
+        
 
     return(
         <div className="min-h-screen">
-            <Layout head={sessionInput}>
+            <Layout head={casesInput}>
 
                 <main  className="pt-20 p-7  flex-grow">
-
-
                     
                     <Table 
-                        head={["student id", "case id", "course id", "mate1rials"]}
-                        body={session}
+                        head={
+                            casesInput.map(input => input.name)
+                        }
+                        body={cases}
                     /> 
-
-                    <AddSessionForm formValues={formValues} setFormValues={setFormValues}/>
                 </main>
             </Layout>
         </div>
