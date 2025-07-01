@@ -19,7 +19,7 @@ export default async function handler(
         message: 'course deleted successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting course:', error);
       res.status(500).json({
         message: 'Error deleting course',

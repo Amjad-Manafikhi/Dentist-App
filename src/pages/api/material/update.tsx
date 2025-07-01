@@ -30,7 +30,7 @@ export default async function handler(
         message: 'material updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating material:', error);
       res.status(500).json({
         message: 'Error updating material',

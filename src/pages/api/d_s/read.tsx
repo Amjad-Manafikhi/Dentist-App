@@ -14,7 +14,7 @@ export default async function handler(
       );
 
       res.status(200).json(d_s_records as D_S[]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching D_S records:', error);
       res.status(500).json({
         message: 'Error fetching D_S records',

@@ -30,7 +30,7 @@ export default async function handler(
         message: 'course updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating course:', error);
       res.status(500).json({
         message: 'Error updating course',

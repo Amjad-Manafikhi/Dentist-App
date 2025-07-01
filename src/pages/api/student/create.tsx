@@ -34,7 +34,7 @@ export default async function handler(
         message: 'Student added successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating student:', error);
       res.status(500).json({
         message: 'Error creating student',

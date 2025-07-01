@@ -33,7 +33,7 @@ export default async function handler(
         message: 'S_S record updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating S_S record:', error);
       res.status(500).json({
         message: 'Error updating S_S record',

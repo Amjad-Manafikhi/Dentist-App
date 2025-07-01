@@ -21,7 +21,7 @@ export default async function handler(
         message: 'S_C record deleted successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting S_C record:', error);
       res.status(500).json({
         message: 'Error deleting S_C record',

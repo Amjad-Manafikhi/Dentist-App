@@ -32,7 +32,7 @@ export default async function handler(
         message: 'case updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating case:', error);
       res.status(500).json({
         message: 'Error updating case',

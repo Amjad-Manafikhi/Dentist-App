@@ -15,7 +15,7 @@ export default async function handler(
       );
 
       res.status(200).json(cases as TableRow[]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching cases:', error);
       res.status(500).json({
         message: 'Error fetching cases',

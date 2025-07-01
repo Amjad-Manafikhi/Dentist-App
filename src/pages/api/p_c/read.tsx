@@ -14,7 +14,7 @@ export default async function handler(
       );
 
       res.status(200).json(p_c as P_C[]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching P_C records:', error);
       res.status(500).json({
         message: 'Error fetching P_C records',

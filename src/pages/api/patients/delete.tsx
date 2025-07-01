@@ -19,7 +19,7 @@ export default async function handler(
         message: 'Patient deleted successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting patient:', error);
       res.status(500).json({
         message: 'Error deleting patient',

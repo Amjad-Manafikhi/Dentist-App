@@ -31,7 +31,7 @@ export default async function handler(
         message: 'Patient updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating patient:', error);
       res.status(500).json({
         message: 'Error updating patient',

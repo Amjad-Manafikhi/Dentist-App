@@ -16,7 +16,7 @@ export default async function handler(
       );
 
       res.status(200).json(session as TableRow[]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching session:', error);
       res.status(500).json({
         message: 'Error fetching session',

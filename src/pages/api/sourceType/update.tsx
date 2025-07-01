@@ -28,7 +28,7 @@ export default async function handler(
         message: 'sourceType updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating sourceType:', error);
       res.status(500).json({
         message: 'Error updating sourceType',

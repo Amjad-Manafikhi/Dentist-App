@@ -27,7 +27,7 @@ export default async function handler(
         message: 'SourceType added successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating source type:', error);
       res.status(500).json({
         message: 'Error creating source type',

@@ -29,7 +29,7 @@ export default async function handler(
         message: 'doctor updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating doctor:', error);
       res.status(500).json({
         message: 'Error updating doctor',

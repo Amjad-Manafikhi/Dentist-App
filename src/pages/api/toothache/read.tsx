@@ -16,7 +16,7 @@ export default async function handler(
       );
 
       res.status(200).json(toothache as TableRow[]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching toothache:', error);
       res.status(500).json({
         message: 'Error fetching toothache',

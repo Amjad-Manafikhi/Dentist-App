@@ -31,7 +31,7 @@ export default async function handler(
         message: 'S_S record added successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating S_S record:', error);
       res.status(500).json({
         message: 'Error creating S_S record',

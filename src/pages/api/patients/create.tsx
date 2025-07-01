@@ -32,7 +32,7 @@ export default async function handler(
         message: 'Patient added successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating patient:', error);
       res.status(500).json({
         message: 'Error creating patient',

@@ -31,7 +31,7 @@ export default async function handler(
         message: 'P_C record added successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating P_C record:', error);
       res.status(500).json({
         message: 'Error creating P_C record',

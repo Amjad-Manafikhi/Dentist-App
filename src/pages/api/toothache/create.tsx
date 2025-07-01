@@ -31,7 +31,7 @@ export default async function handler(
         message: 'Toothache added successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating toothache:', error);
       res.status(500).json({
         message: 'Error creating toothache',

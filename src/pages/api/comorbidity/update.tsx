@@ -28,7 +28,7 @@ export default async function handler(
         message: 'comorbidity updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating comorbidity:', error);
       res.status(500).json({
         message: 'Error updating comorbidity',

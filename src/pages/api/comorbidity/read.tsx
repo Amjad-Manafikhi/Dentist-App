@@ -16,7 +16,7 @@ export default async function handler(
       );
       console.log(comorbidity)
       res.status(200).json(comorbidity as TableRow[]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching comorbidity:', error);
       res.status(500).json({
         message: 'Error fetching comorbidity',

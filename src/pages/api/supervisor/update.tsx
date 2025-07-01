@@ -28,7 +28,7 @@ export default async function handler(
         message: 'supervisor updated successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating supervisor:', error);
       res.status(500).json({
         message: 'Error updating supervisor',

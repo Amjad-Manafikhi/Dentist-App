@@ -14,7 +14,7 @@ export default async function handler(
       );
 
       res.status(200).json(s_s_c as S_S_C[]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching S_S_C records:', error);
       res.status(500).json({
         message: 'Error fetching S_S_C records',

@@ -27,7 +27,7 @@ export default async function handler(
         message: 'Comorbidity added successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating comorbidity:', error);
       res.status(500).json({
         message: 'Error creating comorbidity',

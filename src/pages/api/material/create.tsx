@@ -31,7 +31,7 @@ export default async function handler(
         message: 'Material added successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating material:', error);
       res.status(500).json({
         message: 'Error creating material',

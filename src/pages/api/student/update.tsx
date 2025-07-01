@@ -32,7 +32,7 @@ export default async function handler(
         message: 'Patient student successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating student:', error);
       res.status(500).json({
         message: 'Error updating student',

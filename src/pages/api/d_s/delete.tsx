@@ -21,7 +21,7 @@ export default async function handler(
         message: 'D_S record deleted successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting D_S record:', error);
       res.status(500).json({
         message: 'Error deleting D_S record',

@@ -4,7 +4,6 @@ import { GetServerSideProps } from "next";
 import {sessionInput} from './../components/FormInput';
 import Table from "@/components/Table";
 import { AddSession, TableRow } from "@/models/Database";
-import AddSessionForm from './../components/AddSessionForm';
 type Props ={
     session:TableRow[]
 }
@@ -55,7 +54,6 @@ export default function Session({session}:Props){
                         body={session}
                     /> 
 
-                    <AddSessionForm formValues={formValues} setFormValues={setFormValues}/>
                 </main>
             </Layout>
         </div>

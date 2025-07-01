@@ -19,7 +19,7 @@ export default async function handler(
         message: 'toothache deleted successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting toothache:', error);
       res.status(500).json({
         message: 'Error deleting toothache',

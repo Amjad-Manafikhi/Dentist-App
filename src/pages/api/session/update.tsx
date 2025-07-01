@@ -28,7 +28,7 @@ export default async function handler(
         message: 'Patient session successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating session:', error);
       res.status(500).json({
         message: 'Error updating session',

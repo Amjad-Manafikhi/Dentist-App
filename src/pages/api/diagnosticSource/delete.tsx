@@ -19,7 +19,7 @@ export default async function handler(
         message: 'diagnosticSource deleted successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting diagnosticSource:', error);
       res.status(500).json({
         message: 'Error deleting diagnosticSource',

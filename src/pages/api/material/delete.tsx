@@ -19,7 +19,7 @@ export default async function handler(
         message: 'material deleted successfully',
         result,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting material:', error);
       res.status(500).json({
         message: 'Error deleting material',
