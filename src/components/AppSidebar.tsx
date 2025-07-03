@@ -24,6 +24,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 export function AppSidebar() {
   const tables = [
@@ -54,10 +55,11 @@ export function AppSidebar() {
             return (
               <SidebarMenuItem key={table.title}>
                 <SidebarMenuButton asChild>
-                  <a href={table.url} className="flex items-center gap-2">
+                  
+                <Link href={table.url} passHref className="flex items-center gap-2">
                     <Icon className="w-4 h-4" />
                     <span>{table.title}</span>
-                  </a>
+                </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             );
