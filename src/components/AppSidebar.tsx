@@ -25,8 +25,13 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
+
+  const pathname = usePathname();
+
   const tables = [
     { id: 1, title: "Course", url: "/dashboard/course", icon: FaBookOpen },
     { id: 2, title: "Student", url: "/dashboard/student", icon: FaUserGraduate },
@@ -52,11 +57,18 @@ export function AppSidebar() {
 
   const tableElements=tables.map((table) => {
             const Icon = table.icon;
+            const isActive = pathname === table.url;
             return (
               <SidebarMenuItem key={table.title}>
                 <SidebarMenuButton asChild>
                   
-                <Link href={table.url} passHref className="flex items-center gap-2">
+                <Link href={table.url} passHref 
+                  className={cn(
+                    "flex items-center gap-2 rounded-md px-4 py-2 transition-colors",
+                    isActive
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-muted hover:text-foreground"
+                  )} >
                     <Icon className="w-4 h-4" />
                     <span>{table.title}</span>
                 </Link>

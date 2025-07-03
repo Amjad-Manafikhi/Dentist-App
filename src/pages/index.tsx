@@ -1,29 +1,29 @@
 import Layout from "@/components/Layout";
 import { GetServerSideProps } from "next";
-import {sessionInput} from './../components/FormInput';
+import {studentInput} from './../components/FormInput';
 import Table from "@/components/Table";
 import { TableRow } from "@/models/Database";
 type Props ={
-    session:TableRow[]
+    student:TableRow[]
 }
 const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL;    
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     try{
-        const res = await fetch(NEXT_PUBLIC_API_URL+'/api/session/read');
+        const res = await fetch(NEXT_PUBLIC_API_URL+'/api/student/read');
         console.log(res);
         if (!res.ok) {
             return {
                 props: {
-                    session: []
+                    student: []
                 },
             };
         }
-        const session:TableRow[]=await res.json();
+        const student:TableRow[]=await res.json();
         
         return{
             props:{
-                session:session,
+                student:student,
             }
         }
     }
@@ -31,29 +31,28 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
         console.log(error);
         return{
             props:{
-                session:[]
+                student:[]
             }
         }
     }
 }
     
-export default function Session({session}:Props){
-  
+export default function Student({student}:Props){
+        
 
     return(
         <div className="min-h-screen">
-            <Layout head={sessionInput}>
+            <Layout head={studentInput}>
 
                 <main  className="pt-20 p-7  flex-grow">
-
-
                     
                     <Table 
-                        head={["student id", "case id", "course id", "mate1rials"]}
-                        body={session}
-                        inputType={sessionInput}
+                        head={
+                            studentInput.map(input => input.name)
+                        }
+                        body={student}
+                        inputType={studentInput}
                     /> 
-
                 </main>
             </Layout>
         </div>
