@@ -5,6 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+  const tableName="cases";
   if (req.method === 'DELETE') {
     const { id } = req.body;
     console.log(id);
@@ -19,15 +20,25 @@ export default async function handler(
         message: 'Case deleted successfully',
         result,
       });
-    } catch (error: unknown) {
-      console.error('Error deleting case:', error);
-      res.status(500).json({
-        message: 'Error deleting case',
-        error: error.message,
-      });
+      }catch (error: unknown) {
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
-  } else {
-    res.setHeader('Allow', ['DELETE']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
+    } else {
+      res.setHeader('Allow', ['DELETE']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
+    }
 }
+
+

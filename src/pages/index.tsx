@@ -52,6 +52,7 @@ export default function Session({session}:Props){
                     <Table 
                         head={["student id", "case id", "course id", "mate1rials"]}
                         body={session}
+                        inputType={sessionInput}
                     /> 
 
                 </main>

@@ -5,6 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+  const tableName="source type";
   if (req.method === 'POST') {
     const newRow = req.body.newRow;
     const { id } = req.body;
@@ -29,11 +30,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error updating sourceType:', error);
-      res.status(500).json({
-        message: 'Error updating sourceType',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['POST']);

@@ -91,8 +91,9 @@ export type Toothache = {
 export type Course = {
   id: number;
   name: string;
-  department: string;
+  department_d: number;
   term: string;
+  year: number;
 };
 // 1) S_M (patient–comorbidity)
 export type S_M = {

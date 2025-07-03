@@ -50,6 +50,7 @@ export default function s_m({s_m}:Props){
                             s_mInput.map(input => input.name)
                         }
                         body={s_m}
+                        inputType={s_mInput}
                     /> 
                 </main>
             </Layout>

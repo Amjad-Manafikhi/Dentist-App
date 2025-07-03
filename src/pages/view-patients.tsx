@@ -47,6 +47,7 @@ export default function ViewPatients({patients}:Props){
                     patientInput.map(input => input.name)
                 }
                 element={element}
+                inputType={patientInput}
                 
                 
             />

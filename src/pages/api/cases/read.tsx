@@ -7,6 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<TableRow[] | { message: string; error: string }>
 ) {
+  const tableName="cases";
   if (req.method === 'GET') {
     console.log("get")
     try {
@@ -16,11 +17,19 @@ export default async function handler(
 
       res.status(200).json(cases as TableRow[]);
     } catch (error: unknown) {
-      console.error('Error fetching cases:', error);
-      res.status(500).json({
-        message: 'Error fetching cases',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['GET']);

@@ -5,33 +5,49 @@ import { useRouter } from "next/router";
 import { TableRow } from "@/models/Database";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import {inputMap} from './FormInput'
+import {inputMap, InputType} from './FormInput'
+
 type ElementProps={
     element:TableRow;
     head:string[];
+    inputType:InputType[];
 }
 
 
 
 
-function Element({element, head}:ElementProps) {
+function Element({element, head, inputType}:ElementProps) {
   
-  function initialValues(): TableRow {
-  const initialValue: TableRow = {} as TableRow;
+  function getInitialValues<T extends TableRow>(head: InputType[]): T { // Corrected: 'head' is InputType[]
+    const initialValue = {} as T;
 
-  head.forEach((column) => {
-    const value = typeof element[column as keyof typeof element] === "string" ? "" : 0;
-    initialValue[column as keyof TableRow] = value as any;
-  });
+    head.forEach((col) => {
+      let value: any; // Use 'any' here as the value type can vary (string, number, boolean)
 
-  return initialValue;
-}
+      switch (col.type) {
+        case "checkbox":
+          value = false;
+          break;
+        case "number":
+          value = 0;
+          break;
+        default: // Covers "text", "date", "tel"
+          value = "";
+      }
+
+      // Assert col.name as keyof T to ensure type safety when assigning to initialValue
+      // This cast assumes that 'col.name' will always correspond to a valid key in 'T'.
+      initialValue[col.name as keyof T] = value as T[keyof T];
+    });
+
+    return initialValue;
+  }
 
 
 
 
   const [openEdit, setOpenEdit] = useState(false);
-  const [editFormValues, setEditFormValues] = useState(()=>initialValues())
+  const [editFormValues, setEditFormValues] = useState(()=>getInitialValues(inputType))
   const [idToEdit, setIdToEdit] = useState(-1);
   const router = useRouter();
   const match = router.pathname.match(/[^/]+$/);

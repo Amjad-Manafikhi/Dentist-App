@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+  const tableName="s_m";
   if (req.method === 'POST') {
     const newRow: S_M = req.body.newRow;
     const { id } = req.body; // Assuming the ID is passed separately in the body
@@ -35,11 +36,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error updating S_M record:', error);
-      res.status(500).json({
-        message: 'Error updating S_M record',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['POST']);

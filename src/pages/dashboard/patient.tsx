@@ -50,6 +50,7 @@ export default function Patient({patients}:Props){
                             patientInput.map(input => input.name)
                         }
                         body={patients}
+                        inputType={patientInput}
                     />
                     
                 </main>

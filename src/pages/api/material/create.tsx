@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+  const tableName="material";
   if (req.method === 'PUT') {
     const newRow: Material = req.body.newRow;
 
@@ -32,11 +33,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error creating material:', error);
-      res.status(500).json({
-        message: 'Error creating material',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     // Handle unsupported HTTP methods

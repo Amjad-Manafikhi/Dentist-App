@@ -50,6 +50,7 @@ export default function Material({material}:Props){
                             materialInput.map(input => input.name)
                         }
                         body={material}
+                        inputType={materialInput}
                     />  
                 </main>
             </Layout>

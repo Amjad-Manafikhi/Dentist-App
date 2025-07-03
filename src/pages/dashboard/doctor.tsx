@@ -51,6 +51,7 @@ export default function Doctor({doctor}:Props){
                             doctorInput.map(input => input.name)
                         }
                         body={doctor}
+                        inputType={doctorInput}
                     /> 
                 </main>
             </Layout>

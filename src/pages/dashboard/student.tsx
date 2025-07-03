@@ -50,6 +50,7 @@ export default function Student({student}:Props){
                             studentInput.map(input => input.name)
                         }
                         body={student}
+                        inputType={studentInput}
                     /> 
                 </main>
             </Layout>

@@ -49,6 +49,7 @@ export default function Toothache({toothache}:Props){
                             toothacheInput.map(input => input.name)
                         }
                         body={toothache}
+                        inputType={toothacheInput}
                     /> 
                 </main>
             </Layout>

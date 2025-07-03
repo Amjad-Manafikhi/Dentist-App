@@ -5,6 +5,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+    const tableName="comorbidity";
+
   if (req.method === 'DELETE') {
     const { id } = req.body;
     console.log(id);
@@ -20,11 +22,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error deleting comorbidity:', error);
-      res.status(500).json({
-        message: 'Error deleting comorbidity',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['DELETE']);

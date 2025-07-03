@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+  const tableName="s_c";
   if (req.method === 'PUT') {
     const newRow: S_C = req.body.newRow;
 
@@ -13,19 +14,18 @@ export default async function handler(
     if (
       !newRow ||
       newRow.course_id === undefined ||
-      newRow.student_id === undefined ||
-      newRow.mark === undefined 
+      newRow.student_id === undefined
     ) {
       return res.status(400).json({ message: 'Missing S_C values' });
     }
 
     try {
-      const { course_id, student_id, mark } = newRow;
+      const { course_id, student_id } = newRow;
 
       // SQL query to insert a new S_C record
       const result = await query(
         'INSERT INTO s_s (course_id, student_id, mark) VALUES (?, ?, ?)',
-        [course_id, student_id, mark]
+        [course_id, student_id]
       );
 
       res.status(200).json({
@@ -33,11 +33,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error creating S_C record:', error);
-      res.status(500).json({
-        message: 'Error creating S_C record',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['PUT']);

@@ -50,6 +50,7 @@ export default function Course({course}:Props){
                             courseInput.map(input => input.name)
                         }
                         body={course}
+                        inputType={courseInput}
                     /> 
                 </main>
             </Layout>

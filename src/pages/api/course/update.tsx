@@ -5,6 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+  const tableName="course";
   if (req.method === 'POST') {
     const newRow = req.body.newRow;
     const { id } = req.body;
@@ -12,18 +13,19 @@ export default async function handler(
     if (
       !newRow ||
       !newRow.name ||
-      !newRow.department ||
-      !newRow.term 
+      !newRow.department_id ||
+      !newRow.term ||
+      !newRow.year
     ) {
       return res.status(400).json({ message: 'Missing course values' });
     }
 
     try {
-      const { name, department, term} = newRow;
+      const { name, department_id, term, year} = newRow;
 
       const result = await query(
-        'UPDATE course SET name = ?, department = ?, term = ? WHERE id = ?',
-        [name, department, term, id]
+        'UPDATE course SET name = ?, department_id = ?, term = ?, year = ? WHERE id = ?',
+        [name, department_id, term, year, id]
       );
 
       res.status(200).json({
@@ -31,11 +33,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error updating course:', error);
-      res.status(500).json({
-        message: 'Error updating course',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['POST']);

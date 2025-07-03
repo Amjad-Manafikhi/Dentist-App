@@ -2,6 +2,7 @@ import {
   TableRow
 } from './../models/Database';
 import Element from './Element';
+import { InputType } from './FormInput';
 
 // Create a union type of all possible table row types
 
@@ -9,9 +10,10 @@ import Element from './Element';
 type TableProps = {
   head: string[];
   body: TableRow[];
+  inputType:InputType[];
 }
 
-export default function Table({ head, body }: TableProps) {
+export default function Table({ head, body, inputType }: TableProps) {
   const bodyElements = body.map((element, index) => {
     // Use index as fallback key if element.id is not available
     const key = 'id' in element ? element.id : index;
@@ -21,6 +23,7 @@ export default function Table({ head, body }: TableProps) {
         key={key} 
         head={head}  
         element={element}
+        inputType={inputType}
       />
     );
   });

@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+  const tableName="s_s_c";
   if (req.method === 'PUT') {
     const newRow: S_S_C = req.body.newRow;
     // Check if required fields are present
@@ -32,11 +33,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error creating S_S_C record:', error);
-      res.status(500).json({
-        message: 'Error creating S_S_C record',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['PUT']);

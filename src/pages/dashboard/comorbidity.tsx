@@ -50,6 +50,7 @@ export default function Comorbidity({comorbidity}:Props){
                             comorbidityInput.map(input => input.name)
                         }
                         body={comorbidity}
+                        inputType={comorbidityInput}
                     /> 
                 </main>
             </Layout>

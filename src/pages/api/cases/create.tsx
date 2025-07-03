@@ -4,8 +4,11 @@ import { Cases } from '@/models/Database'; // Assuming Database.ts contains your
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string; result?: any; error?: string }>
+  res: NextApiResponse<{ message: string; result?: unknown; error?: string }>
 ) {
+
+    const tableName="cases";
+
   if (req.method === 'PUT') {
     const newRow: Cases = req.body.newRow;
 
@@ -34,13 +37,22 @@ export default async function handler(
         message: 'Cases added successfully',
         result,
       });
-    } catch (error: unknown) {
-      console.error('Error creating cases:', error);
-      res.status(500).json({
-        message: 'Error creating cases',
-        error: error.message,
-      });
+    }  catch (error: unknown) {
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
+
   } else {
     // Handle unsupported HTTP methods
     res.setHeader('Allow', ['PUT']);

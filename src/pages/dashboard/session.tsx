@@ -50,6 +50,7 @@ export default function Session({session}:Props){
                             sessionInput.map(input => input.name)
                         }
                         body={session}
+                        inputType={sessionInput}
                     /> 
                 </main>
             </Layout>

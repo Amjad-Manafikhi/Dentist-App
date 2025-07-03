@@ -50,6 +50,7 @@ export default function Supervisor({supervisor}:Props){
                             supervisorInput.map(input => input.name)
                         }
                         body={supervisor}
+                        inputType={supervisorInput}
                     />  
                 </main>
             </Layout>

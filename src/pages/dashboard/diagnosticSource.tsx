@@ -50,6 +50,7 @@ export default function DiagnosticSource({diagnosticSource}:Props){
                             diagnosticSourceInput.map(input => input.name)
                         }
                         body={diagnosticSource}
+                        inputType={diagnosticSourceInput}
                     /> 
                 </main>
             </Layout>

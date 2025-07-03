@@ -50,6 +50,7 @@ export default function Casess({cases}:Props){
                             casesInput.map(input => input.name)
                         }
                         body={cases}
+                        inputType={casesInput}
                     /> 
                 </main>
             </Layout>

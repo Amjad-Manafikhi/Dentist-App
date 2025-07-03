@@ -96,10 +96,11 @@ export const toothacheInput:InputType[] = [
 
 // 13) course
 export const courseInput:InputType[] = [
-  { name: "id",         type: "number" },
-  { name: "name",       type: "text"   },
-  { name: "department", type: "text"   },
-  { name: "term",       type: "text"   },
+  { name: "id",            type: "number" },
+  { name: "name",          type: "text"   },
+  { name: "department_id", type: "number"   },
+  { name: "term",          type: "text"   },
+  { name: "year",          type: "number"   },
 ];
 
 // 14) s_c (student–course)

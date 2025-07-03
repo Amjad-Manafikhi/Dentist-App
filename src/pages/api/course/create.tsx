@@ -5,6 +5,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+    const tableName="course";
+
   if (req.method === 'PUT') {
     const newRow = req.body.newRow;
     const { id } = req.body;
@@ -12,18 +14,19 @@ export default async function handler(
     if (
       !newRow ||
       !newRow.name ||
-      !newRow.department ||
-      !newRow.term 
+      !newRow.department_id ||
+      !newRow.term||
+      !newRow.year 
     ) {
       return res.status(400).json({ message: 'Missing course values' });
     }
 
     try {
-      const { name, department, term} = newRow;
+      const { name, department_id, term, year} = newRow;
 
       const result = await query(
-        'INSERT INTO course name = ?, department = ?, term = ? WHERE id = ?',
-        [name, department, term, id]
+        'INSERT INTO course (name, department_id, term, year ) VALUES (?, ?, ?, ?)',
+        [name, department_id, term, year]
       );
 
       res.status(200).json({
@@ -31,11 +34,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error creating course:', error);
-      res.status(500).json({
-        message: 'Error creating course',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['PUT']);

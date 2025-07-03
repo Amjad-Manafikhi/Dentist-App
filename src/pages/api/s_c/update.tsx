@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ message: string; result?: any; error?: string }>
 ) {
+  const tableName="s_c";
   if (req.method === 'POST') {
     const newRow: S_C = req.body.newRow;
     const { id } = req.body; // Assuming the ID is passed separately in the body
@@ -15,19 +16,18 @@ export default async function handler(
       !id ||
       !newRow ||
       newRow.course_id === undefined ||
-      newRow.student_id === undefined ||
-      newRow.mark === undefined 
+      newRow.student_id === undefined  
     ) {
       return res.status(400).json({ message: 'Missing S_C ID or values' });
     }
 
     try {
-      const { course_id, student_id, mark } = newRow;
+      const { course_id, student_id} = newRow;
 
       // SQL query to update an S_C record by ID
       const result = await query(
-        'UPDATE s_s SET course_id = ?, student_id = ?, mark = ? = ? WHERE id = ?',
-        [course_id, student_id, mark, id]
+        'UPDATE s_s SET course_id = ?, student_id = ?, WHERE id = ?',
+        [course_id, student_id, id]
       );
 
       res.status(200).json({
@@ -35,11 +35,19 @@ export default async function handler(
         result,
       });
     } catch (error: unknown) {
-      console.error('Error updating S_C record:', error);
-      res.status(500).json({
-        message: 'Error updating S_C record',
-        error: error.message,
-      });
+        console.error(`Error creating ${tableName}:`, error);
+
+        if (error instanceof Error) {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: error.message,
+          });
+        } else {
+          res.status(500).json({
+            message: `Error creating ${tableName}`,
+            error: 'Unknown error occurred',
+          });
+        }
     }
   } else {
     res.setHeader('Allow', ['POST']);

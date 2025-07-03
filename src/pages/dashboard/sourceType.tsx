@@ -50,6 +50,7 @@ export default function sourceType({sourceType}:Props){
                             sourceTypeInput.map(input => input.name)
                         }
                         body={sourceType}
+                        inputType={sourceTypeInput}
                     /> 
                 </main>
             </Layout>
