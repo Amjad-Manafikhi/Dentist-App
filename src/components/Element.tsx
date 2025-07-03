@@ -13,6 +13,7 @@ type ElementProps={
     inputType:InputType[];
 }
 
+type PrimitiveTypes = string | Date | number | boolean; 
 
 
 
@@ -22,7 +23,7 @@ function Element({element, head, inputType}:ElementProps) {
     const initialValue = {} as T;
 
     head.forEach((col) => {
-      let value: any; // Use 'any' here as the value type can vary (string, number, boolean)
+      let value: PrimitiveTypes; // Use 'any' here as the value type can vary (string, number, boolean)
 
       switch (col.type) {
         case "checkbox":

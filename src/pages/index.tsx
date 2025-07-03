@@ -1,9 +1,8 @@
 import Layout from "@/components/Layout";
 import { GetServerSideProps } from "next";
- import {useState} from "react";
 import {sessionInput} from './../components/FormInput';
 import Table from "@/components/Table";
-import { AddSession, TableRow } from "@/models/Database";
+import { TableRow } from "@/models/Database";
 type Props ={
     session:TableRow[]
 }
