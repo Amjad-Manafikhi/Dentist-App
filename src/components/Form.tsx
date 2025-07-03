@@ -33,7 +33,7 @@ export default function Form({tableInputs, idToEdit, formValues, setFormValues}:
         e.preventDefault()
         if(id){
           try {
-            const res = await fetch('http://localhost:3000/api/'+lastSegment+'/update', {
+            const res = await fetch('/api/'+lastSegment+'/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export default function Form({tableInputs, idToEdit, formValues, setFormValues}:
     }
     else {
          try {
-            const res = await fetch('http://localhost:3000/api/'+lastSegment+'/create', {
+            const res = await fetch('/api/'+lastSegment+'/create', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

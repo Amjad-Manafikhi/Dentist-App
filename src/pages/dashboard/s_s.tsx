@@ -9,7 +9,7 @@ type Props ={
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     try{
-        const res = await fetch('http://localhost:3000/api/s_s/read');
+        const res = await fetch('/api/s_s/read');
         console.log(res);
         if (!res.ok) {
             return {

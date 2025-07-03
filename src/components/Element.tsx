@@ -65,7 +65,7 @@ function Element({element, head, inputType}:ElementProps) {
   try {
     console.log(match)
     console.log(lastSegment)
-    const url='http://localhost:3000/api/' + lastSegment + '/delete';
+    const url='/api/' + lastSegment + '/delete';
     console.log(url)
     const res = await fetch(url, {
       method: 'DELETE',
