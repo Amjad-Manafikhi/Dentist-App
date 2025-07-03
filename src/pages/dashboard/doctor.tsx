@@ -6,10 +6,11 @@ import { TableRow } from "@/models/Database";
 type Props ={
     doctor:TableRow[]
 }
+const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL;    
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     try{
-        const res = await fetch('/api/doctor/read');
+        const res = await fetch(NEXT_PUBLIC_API_URL+'/api/doctor/read');
         console.log(res);
         if (!res.ok) {
             return {

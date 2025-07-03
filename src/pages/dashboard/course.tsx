@@ -6,10 +6,11 @@ import { TableRow } from "@/models/Database";
 type Props ={
     course:TableRow[]
 }
+const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL;    
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     try{
-        const res = await fetch('/api/course/read');
+        const res = await fetch(NEXT_PUBLIC_API_URL+'/api/course/read');
         console.log(res);
         if (!res.ok) {
             return {

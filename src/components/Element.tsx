@@ -15,6 +15,7 @@ type ElementProps={
 
 type PrimitiveTypes = string | Date | number | boolean; 
 
+const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL;    
 
 
 function Element({element, head, inputType}:ElementProps) {
@@ -65,7 +66,7 @@ function Element({element, head, inputType}:ElementProps) {
   try {
     console.log(match)
     console.log(lastSegment)
-    const url='/api/' + lastSegment + '/delete';
+    const url=NEXT_PUBLIC_API_URL+'/api/' + lastSegment + '/delete';
     console.log(url)
     const res = await fetch(url, {
       method: 'DELETE',

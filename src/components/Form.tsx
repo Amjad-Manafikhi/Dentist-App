@@ -10,6 +10,8 @@ type Props={
     idToEdit?:number;
 }
 
+const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL;    
+
 
 export default function Form({tableInputs, idToEdit, formValues, setFormValues}:Props){
     
@@ -33,7 +35,7 @@ export default function Form({tableInputs, idToEdit, formValues, setFormValues}:
         e.preventDefault()
         if(id){
           try {
-            const res = await fetch('/api/'+lastSegment+'/update', {
+            const res = await fetch(NEXT_PUBLIC_API_URL+'/api/'+lastSegment+'/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +61,7 @@ export default function Form({tableInputs, idToEdit, formValues, setFormValues}:
     }
     else {
          try {
-            const res = await fetch('/api/'+lastSegment+'/create', {
+            const res = await fetch(NEXT_PUBLIC_API_URL+'/api/'+lastSegment+'/create', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
