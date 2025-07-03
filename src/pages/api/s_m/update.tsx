@@ -4,7 +4,7 @@ import { S_M } from '@/models/Database'; // Assuming you have a Database.ts in '
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string; result?: any; error?: string }>
+  res: NextApiResponse<{ message: string; result?: unknown; error?: string }>
 ) {
   const tableName="s_m";
   if (req.method === 'POST') {

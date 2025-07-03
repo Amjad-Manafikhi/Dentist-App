@@ -4,7 +4,7 @@ import { Comorbidity } from '@/models/Database'; // Assuming Database.ts contain
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string; result?: any; error?: string }>
+  res: NextApiResponse<{ message: string; result?: unknown; error?: string }>
 ) {
   const tableName="comorbidity";
   if (req.method === 'PUT') {

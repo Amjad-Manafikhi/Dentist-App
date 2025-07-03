@@ -39,7 +39,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     
 export default function Session({session}:Props){
   
-  const [formValues, setFormValues]=useState<AddSession>({student_id:0,case_id:0,course_id:0,materials:[]});
 
     return(
         <div className="min-h-screen">

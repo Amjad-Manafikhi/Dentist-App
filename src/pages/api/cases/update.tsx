@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string; result?: any; error?: string }>
+  res: NextApiResponse<{ message: string; result?: unknown; error?: string }>
 ) {
   const tableName="cases";
   if (req.method === 'POST') {

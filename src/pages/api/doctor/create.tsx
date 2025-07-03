@@ -4,7 +4,7 @@ import { Doctor } from '@/models/Database'; // Assuming Database.ts contains you
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string; result?: any; error?: string }>
+  res: NextApiResponse<{ message: string; result?: unknown; error?: string }>
 ) {
   const tableName="doctor";
   if (req.method === 'PUT') {

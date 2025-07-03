@@ -4,7 +4,7 @@ import { Material } from '@/models/Database'; // Assuming Database.ts contains y
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string; result?: any; error?: string }>
+  res: NextApiResponse<{ message: string; result?: unknown; error?: string }>
 ) {
   const tableName="material";
   if (req.method === 'PUT') {

@@ -3,13 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string; result?: any; error?: string }>
+  res: NextApiResponse<{ message: string; result?: unknown; error?: string }>
 ) {
     const tableName="course";
 
   if (req.method === 'PUT') {
     const newRow = req.body.newRow;
-    const { id } = req.body;
     console.log(newRow)
     if (
       !newRow ||
