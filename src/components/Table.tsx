@@ -29,10 +29,10 @@ export default function Table({ head, body, inputType }: TableProps) {
   });
 
   return (
-      <div className="w-full overflow-x-auto">
-      <table className="min-w-[500px] border border-gray-200">
-        <thead>
-          <tr>
+      <div className="w-full max-h-[290px] overflow-auto m-0">
+      <table className="min-w-[650px]  border border-gray-200 mt-0">
+        <thead className='sticky top-0 z-1'>
+          <tr >
             {head.map((header, index) => (
               <th key={index} className="px-4 py-2 whitespace-nowrap text-left">
                 {header}
