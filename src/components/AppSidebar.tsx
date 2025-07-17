@@ -62,10 +62,10 @@ export function AppSidebar() {
               <SidebarMenuItem key={table.title}>
                 <SidebarMenuButton asChild
                   className={cn(
-                    "flex items-center gap-2 rounded-md px-4 py-2 transition-colors",
+                    "flex items-center gap-2 rounded-md px-4 py-2 transition-colors hover:bg-blue-500 hover:text-foreground hover:text-white",
                     isActive
                       ? "bg-blue-500 text-white"
-                      : "hover:bg-blue-500 hover:text-foreground hover:text-white"
+                      : ""
                   )}
                 >
                   
