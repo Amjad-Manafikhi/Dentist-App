@@ -58,17 +58,20 @@ export function AppSidebar() {
   const tableElements=tables.map((table) => {
             const Icon = table.icon;
             const isActive = pathname === table.url;
-            return (
+            return (  
               <SidebarMenuItem key={table.title}>
-                <SidebarMenuButton asChild>
-                  
-                <Link href={table.url} passHref 
+                <SidebarMenuButton asChild
                   className={cn(
                     "flex items-center gap-2 rounded-md px-4 py-2 transition-colors",
                     isActive
                       ? "bg-blue-500 text-white"
-                      : "hover:bg-muted hover:text-foreground"
-                  )} >
+                      : "hover:bg-blue-500 hover:text-foreground hover:text-white"
+                  )}
+                >
+                  
+                <Link href={table.url} passHref 
+                  
+                  >
                     <Icon className="w-4 h-4" />
                     <span>{table.title}</span>
                 </Link>
