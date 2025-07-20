@@ -12,7 +12,7 @@ export default function Erd(){
 
                 <TransformWrapper >
                     <TransformComponent>
-                        <Image src={ERDImage} alt="ERD-Image" width={800} height={800} />
+                        <Image src={ERDImage} alt="ERD-Image" width={1200} height={1200} />
                     </TransformComponent>
                 </TransformWrapper>
             </div>
