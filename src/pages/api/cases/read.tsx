@@ -8,6 +8,8 @@ export default async function handler(
   res: NextApiResponse<TableRow[] | { message: string; error: string }>
 ) {
   const tableName="cases";
+  
+
   if (req.method === 'GET') {
     console.log("get")
     try {

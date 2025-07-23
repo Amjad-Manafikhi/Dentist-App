@@ -3,19 +3,51 @@ import { GetServerSideProps } from "next";
 import {sessionInput} from './../../components/FormInput';
 import Table from "@/components/Table";
 import { TableRow } from "@/models/Database";
+import { parse } from 'cookie';
+import { decrypt } from "@/lib/session";
 type Props ={
-    session:TableRow[]
+    userId: string;
+    session:TableRow[];
 }
 const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL;    
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-    try{
-        const res = await fetch(NEXT_PUBLIC_API_URL+'/api/session/read');
-        console.log(res);
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+    console.log("asdf")
+        const cookieHeader = context.req.headers.cookie || '';
+        const cookies = parse(cookieHeader);
+        const token = cookies.session;
+
+        if (!token) {
+            return {
+            redirect: {
+                destination: '/signup',
+                permanent: false,
+            },
+            };
+        }
+
+        const userSession = await decrypt(token);
+
+        if (!userSession || userSession.expiresAt < Date.now()) {
+            return {
+            redirect: {
+                destination: '/signup',
+                permanent: false,
+            },
+            };
+        }
+
+        
+    
+      console.log('Server-side cookies:', cookies); // This will include HTTP-only cookies like "session"
+      try{
+          const res = await fetch(NEXT_PUBLIC_API_URL+'/api/session/read');
         if (!res.ok) {
             return {
                 props: {
-                    session: []
+                    session: [],
+                    userId:userSession.userId,
                 },
             };
         }
@@ -24,6 +56,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
         return{
             props:{
                 session:session,
+                userId:userSession.userId,
             }
         }
     }
@@ -31,12 +64,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
         console.log(error);
         return{
             props:{
-                session:[]
+                session:[],
+                userId:userSession.userId,
             }
         }
     }
-}
-    
+      
+} 
 export default function Session({session}:Props){
 
 
