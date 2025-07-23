@@ -4,8 +4,8 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import bcrypt from 'bcryptjs';
 import Link from 'next/link';
+import bcrypt from "bcryptjs"
 
 const formSchema = z
   .object({
@@ -24,7 +24,6 @@ export default function SignupPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(""); 
-  const bcrypt = require('bcryptjs')
 
   const {
     register,
