@@ -13,10 +13,10 @@ export async function signIn(
   const { email, password } = credentials;
 
   try {
-    const users = await query('SELECT * FROM users WHERE email = ?', [email]) as any[];
+    const users = await query('SELECT * FROM users WHERE email = ?', [email]) as Credentials[];
 
     if (users.length === 0) {
-      const error = new Error('Invalid email or password') as any;
+      const error = new Error('Invalid email or password') as Error & {type:string};
       error.type = 'CredentialsSignin';
       throw error;
     }
@@ -24,7 +24,7 @@ export async function signIn(
     const user = users[0];
     const passwordMatch = await bcrypt.compare(password,user.password);
     if (!passwordMatch) {
-      const error = new Error('Invalid email or password') as any;
+      const error = new Error('Invalid email or password') as Error & {type:string};
       error.type = 'CredentialsSignin';
       throw error;
     }
@@ -47,7 +47,7 @@ export async function signup(
         const users = await query ('select email from users where email=?', [email]) as Credentials[];
         console.log(users);
         if (users.length > 0) {
-            const error = new Error('this email is used before') as any;
+            const error = new Error('this email is used before') as Error & {type:string};
             error.type = 'CredentialsSignup';
             throw error;
         }
