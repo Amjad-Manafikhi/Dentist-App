@@ -51,7 +51,7 @@ export async function signup(
             error.type = 'CredentialsSignup';
             throw error;
         }
-        const result = await query('insert into users (email, password) values (?, ?)',[email, password]);
+        await query('insert into users (email, password) values (?, ?)',[email, password]);
         return credentials;
     
     } catch (error) {

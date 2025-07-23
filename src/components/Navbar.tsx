@@ -3,7 +3,6 @@ import { SidebarTrigger } from './ui/sidebar';
 import Link from "next/link";
 import  Cookies from 'js-cookie'
 import { useRouter } from "next/router";
-const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL;    
 export const Navbar = () =>{
     const router= useRouter();   
 
