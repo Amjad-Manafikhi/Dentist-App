@@ -3,7 +3,6 @@ import { GetServerSideProps } from "next";
 import {courseInput} from './../../components/FormInput';
 import Table from "@/components/Table";
 import { TableRow } from "@/models/Database";
-import Home from "@/lib/show-sessions";
 import { parse } from 'cookie';
 import { decrypt } from "@/lib/session";
 type Props ={
@@ -81,7 +80,6 @@ export default function Course({course}:Props){
             <Layout head={courseInput}>
 
                 <main  className="pt-20 p-7  flex-grow">
-                    <Home session={null}/>
                     <Table 
                         head={
                             courseInput.map(input => input.name)
