@@ -4,6 +4,7 @@ import { FaTooth } from 'react-icons/fa'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from "zod"
+import toast, { Toaster } from 'react-hot-toast';
  
 export default function LoginPage() {
 
@@ -42,14 +43,17 @@ export default function LoginPage() {
       console.log(response)
       if (response.ok) {
         setError("");
+        toast.success('Logged in Successfully!')
         router.push('/dashboard/course');
       } else {
           setError(result.error || "Somthing Went Wrong")
+          toast.error(result.error);
       }
     };
  
   return (
     <div className='flex w-screen h-screen justify-center items-center'>
+        <div><Toaster/></div>
         <form
         noValidate={true}
         onSubmit={handleSubmit(onSubmit)}

@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import Link from 'next/link';
 import bcrypt from "bcryptjs"
+import toast, { Toaster } from 'react-hot-toast';
 
 const formSchema = z
   .object({
@@ -49,15 +50,19 @@ export default function SignupPage() {
     setLoading(false);
     console.log(response)
     if (response.ok) {
+      setError("");
+      toast.success('Logged in Successfully!')
       router.push('/dashboard/course');
     } else {
         setError(result.error || "somthing went wrong");
-      
+        toast.error(result.error);
+
     }
   };
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">
+      <div><Toaster/></div>
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}

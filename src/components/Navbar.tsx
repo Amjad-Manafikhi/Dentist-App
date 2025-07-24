@@ -3,8 +3,17 @@ import { SidebarTrigger } from './ui/sidebar';
 import Link from "next/link";
 import  Cookies from 'js-cookie'
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 export const Navbar = () =>{
-    const router= useRouter();   
+    const router= useRouter(); 
+    
+    
+    const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        const isLogged = Cookies.get('loggedIn') === 'true';
+        setLoggedIn(isLogged);
+    }, []);
 
     async function logout() {
         try {
@@ -28,7 +37,6 @@ export const Navbar = () =>{
         }
 
     
-    const loggedIn = Cookies.get('loggedIn');
     console.log(loggedIn)
     return (
         <div className=" w-[100%] h-12 bg-gray-50 shadow-sm rounded-md border border-gray-100 sticky top-2 flex flex-wrap justify-between px-16 items-center z-5">
