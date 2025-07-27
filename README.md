@@ -1,40 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🦷 Dental Education System
 
-## Getting Started
+A web-based platform designed to help dental students track, manage, and review patient procedures. Built with **Next.js**, this system focuses on clean UI, authentication, and easy access to patient information.
 
-First, run the development server:
+🌐 [Live Demo](https://dentist-app-lovat.vercel.app/)
+
+## 📌 Features
+
+- 👩‍⚕️ **User Authentication**: Sign up, login, and logout functionality using session-based auth.
+- 🗃️ **Patient Records**: Add and view patient data, including procedures and notes.
+- 🔒 **Protected Pages**: Only logged-in users can access patient and profile pages.
+- 🍪 **Session Handling with Cookies**: Secure session management with `httpOnly` cookies.
+- 🧼 **Clean Design**: Built with Tailwind CSS for a modern and responsive layout.
+
+## 🧰 Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Database**: MySQL (via a custom API and query utility)
+- **Styling**: Tailwind CSS
+- **Authentication**: Custom auth using sessions + cookies
+- **Icons**: react-icons (e.g., `FaTooth`)
+- **Client Cookie Access**: js-cookie
+
+## 🏗️ Folder Structure
+
+```
+📁 pages
+ ┣ 📂 api
+ ┃ ┗ 📂 auth      → Login, signup, logout APIs
+ ┣ 📜 index.tsx   → Home page
+ ┣ 📜 login.tsx   → Login form
+ ┣ 📜 signup.tsx  → Signup form
+ ┣ 📜 profile.tsx → User profile (protected)
+ ┣ 📜 patients.tsx→ View/Add patients (protected)
+
+📁 lib
+ ┣ 📜 auth.ts     → Logic for sign-in and sign-up
+ ┣ 📜 session.ts  → Session create/delete/check logic
+ ┣ 📜 db.ts       → MySQL DB helper
+
+📁 components
+ ┣ 📜 Navbar.tsx  → Top navigation bar
+ ┗ 📜 Sidebar.tsx → (optional) Sidebar trigger
+```
+
+## ⚙️ Setup Instructions
+
+1. **Clone the repo:**
+
+```bash
+git clone https://github.com/Amjad-Manafikhi/Dentist-App.git
+cd Dentist-App
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+3. **Set up environment variables:**
+
+Create a `.env.local` file:
+
+```env
+DATABASE_URL=your_mysql_connection_url
+NODE_ENV=development
+```
+
+4. **Run the development server:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app should be running at `http://localhost:3000`.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 🔐 Auth & Cookies
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Sessions are stored in encrypted cookies.
+- Login sets an `httpOnly` cookie for the session and a visible `loggedIn` cookie (used for UI state).
+- Logout deletes both cookies via API.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## ✅ TODO / Future Improvements
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Add user roles (e.g., student vs supervisor)
+- Validation on patient input fields
+- Password reset flow
+- Admin dashboard for analytics
 
-## Learn More
+## 👤 Author
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+**Amjad Manafikhi**  
+Aspiring software engineer & full-stack web developer  
+GitHub: [@Amjad-Manafikhi](https://github.com/Amjad-Manafikhi)
