@@ -32,7 +32,7 @@ const Homepage = () => {
             <span className="text-blue-600"> Future Dentists</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Receive professional dental treatment while supporting the education of tomorrow's dental professionals. 
+            Receive professional dental treatment while supporting the education of tomorrow&apos;s dental professionals. 
             Our supervised student clinic provides high-quality care at accessible rates.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -233,7 +233,7 @@ const Homepage = () => {
                 <span className="ml-2 text-lg font-bold">Dental Education Center</span>
               </div>
               <p className="text-gray-400">
-                Training tomorrow's dental professionals while providing quality care today.
+                Training tomorrow&apos;s dental professionals while providing quality care today.
               </p>
             </div>
 

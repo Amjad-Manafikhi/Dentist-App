@@ -11,13 +11,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const email = req.body.email;
     const password = req.body.password;
+    const userRole = req.body.userRole;
     console.log(email, password)
 
     try {
-        const user = await signup('credentials', { email, password });
+        const user = await signup('credentials', { email, password, userRole });
 
         // Set a session using real user ID
-        await createSession(res, user.email);
+        await createSession(res, user.email, userRole);
 
         return res.status(200).json({ success: true });
     } catch (error) {

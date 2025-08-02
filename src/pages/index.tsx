@@ -1,7 +1,4 @@
-import Layout from "@/components/Layout";
 import { GetServerSideProps } from "next";
-import {studentInput} from './../components/FormInput';
-import Table from "@/components/Table";
 import { TableRow } from "@/models/Database";
 import Homepage from "@/components/HomePage";
 type Props ={
@@ -38,7 +35,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     }
 }
     
-export default function Student({student}:Props){
+export default function Student(){
         
 
     return(

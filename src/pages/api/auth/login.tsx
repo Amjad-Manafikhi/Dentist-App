@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const user = await signIn('credentials', { email, password });
 
     // Set a session using real user ID
-    await createSession(res, user.email);
+    await createSession(res, user.email, user?.userRole);
 
     return res.status(200).json({ success: true });
   } catch (error) {

@@ -27,6 +27,8 @@ import {
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import {useState, useEffect} from "react"
+import  Cookies from 'js-cookie'
 
 type SidebarElement={
   id: number;
@@ -37,9 +39,19 @@ type SidebarElement={
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const [isDoctor, setIsDoctor] = useState(false);
+  const [isNotPatient, setIsNotPatient] = useState(false);
+  
+  useEffect(() => {
+        const doctor = Cookies.get('userRole') === 'doctor';
+        setIsDoctor(doctor);
+    }, []);
+  useEffect(() => {
+      const value = Cookies.get('userRole') !== 'patient';
+      setIsNotPatient(value);
+  }, []);
   const ok=true; 
-  const isDoctor = true;
-  const tables = ok ? [
+  const tables = isNotPatient ? [
     { id: 1, title: "Course", url: "/dashboard/course", icon: FaBookOpen },
     { id: 2, title: "Student", url: "/dashboard/student", icon: FaUserGraduate },
     { id: 3, title: "Patient", url: "/dashboard/patient", icon: FaUserInjured },

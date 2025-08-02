@@ -4,11 +4,12 @@ import { query } from './db';
 type Credentials = {
   email: string;
   password: string;
+  userRole:string;
 };
 
 export async function signIn(
   provider: 'credentials',
-  credentials: Credentials
+  credentials: Pick<Credentials, 'email' | 'password'>
 ) {
   const { email, password } = credentials;
 
@@ -40,7 +41,7 @@ export async function signup(
    provider: 'credentials',
    credentials: Credentials
 ){
-    const { email, password } = credentials;
+    const { email, password, userRole } = credentials;
 
     try {
         console.log("amajd");
@@ -51,7 +52,7 @@ export async function signup(
             error.type = 'CredentialsSignup';
             throw error;
         }
-        await query('insert into users (email, password) values (?, ?)',[email, password]);
+        await query('insert into users (email, password, role) values (?, ?, ?)',[email, password, userRole]);
         return credentials;
     
     } catch (error) {

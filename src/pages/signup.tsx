@@ -7,6 +7,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import bcrypt from "bcryptjs"
 import toast, { Toaster } from 'react-hot-toast';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const formSchema = z
   .object({
@@ -25,6 +32,8 @@ export default function SignupPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(""); 
+  const [userRole, setUserRole] = useState(""); 
+  console.log(userRole)
 
   const {
     register,
@@ -34,6 +43,11 @@ export default function SignupPage() {
     resolver: zodResolver(formSchema),
   });
   const onSubmit = async (data: FormSchemaType) => {
+    if(!error && userRole===""){
+        setError("choose your account type");
+        return 
+    }
+    else if(!error)(setError(""));
     setLoading(true);
     const email = data.email;
     const nonHashwedPassword = data.password;
@@ -42,23 +56,24 @@ export default function SignupPage() {
     console.log("qwerqwer")
     console.log(password)
     const response = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, userRole }),
     });
     const result= await response.json();
     setLoading(false);
     console.log(response)
     if (response.ok) {
-      setError("");
-      toast.success('Logged in Successfully!')
-      router.push('/dashboard/course');
+        setError("");
+        toast.success('Logged in Successfully!')
+        router.push('/dashboard/course');
     } else {
         setError(result.error || "somthing went wrong");
         toast.error(result.error);
 
     }
   };
+
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">
@@ -102,6 +117,18 @@ export default function SignupPage() {
             {errors.confirmPassword && (
                 <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>
             )}
+        </div>
+        <div className='flex flex-col'>
+            <Select value={userRole} onValueChange={setUserRole}>
+                <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Create Account as a"/>
+                </SelectTrigger>
+                <SelectContent className='bg-gray-200 border-1'>
+                    <SelectItem value="doctor">Doctor</SelectItem>
+                    <SelectItem value="student">Student</SelectItem>
+                    <SelectItem value="patient">Patient</SelectItem>
+                </SelectContent>
+            </Select>
         </div>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <p className='text-[12px] text-gray-500'>if you already have an account, please click the link {<Link className="underline text-[#0000EE]" href={"/login"}>the link</Link>}</p>

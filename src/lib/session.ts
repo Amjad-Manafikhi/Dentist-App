@@ -34,7 +34,7 @@ export async function decrypt(token: string): Promise<SessionPayload | null> {
 }
 
 // Set the cookie in the response
-export async function createSession(res: NextApiResponse, userId: string) {
+export async function createSession(res: NextApiResponse, userId: string, userRole: string) {
   const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000;
   const token = await encrypt({ userId, expiresAt });
 
@@ -52,7 +52,12 @@ export async function createSession(res: NextApiResponse, userId: string) {
         maxAge: 60 * 60 * 24 * 7,
       }) 
 
-  res.setHeader('Set-Cookie', [cookie, isLoggedIn]);
+  const role =serialize('isDoctor', userRole, {
+        httpOnly: false,
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+      })     
+  res.setHeader('Set-Cookie', [cookie, isLoggedIn, role]);
 }
 
 // Delete the cookie
