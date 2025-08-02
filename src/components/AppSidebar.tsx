@@ -28,11 +28,18 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
+type SidebarElement={
+  id: number;
+  title:string,
+  url:string,
+  icon: React.ComponentType<{className:string}>; 
+}
+
 export function AppSidebar() {
-
   const pathname = usePathname();
-
-  const tables = [
+  const ok=true; 
+  const isDoctor = true;
+  const tables = ok ? [
     { id: 1, title: "Course", url: "/dashboard/course", icon: FaBookOpen },
     { id: 2, title: "Student", url: "/dashboard/student", icon: FaUserGraduate },
     { id: 3, title: "Patient", url: "/dashboard/patient", icon: FaUserInjured },
@@ -52,17 +59,23 @@ export function AppSidebar() {
     { id: 17, title: "S_S_C", url: "/dashboard/s_s_c", icon: FaUserTie },
     { id: 18, title: "S_S", url: "/dashboard/s_s", icon: FaUserTie },
 
-  ];
+  ]: [];
+
+  const settings = isDoctor ? [
+    { id: 1, title: "Profile", url: "/dashboard", icon: FaUserTie },
+    { id: 2, title: "Website", url: "/dashboard/website", icon: FaUserTie },
+  ] : [{ id: 1, title: "Profile", url: "/dashboard", icon: FaUserTie },]
 
 
-  const tableElements=tables.map((table) => {
+  function sidebarElements(elements:SidebarElement[]){ 
+    return elements.map((table) => {
             const Icon = table.icon;
             const isActive = pathname === table.url;
             return (  
               <SidebarMenuItem key={table.title}>
                 <SidebarMenuButton asChild
                   className={cn(
-                    "flex items-center gap-2 rounded-md px-4 py-2 transition-colors hover:bg-blue-500 hover:text-foreground hover:text-white",
+                    "flex items-center gap-2 my-1 rounded-md px-4 py-2 transition-colors hover:bg-blue-500 hover:text-foreground hover:text-white",
                     isActive
                       ? "bg-blue-500 text-white"
                       : ""
@@ -79,18 +92,28 @@ export function AppSidebar() {
               </SidebarMenuItem>
             );
           })
+      }
 
   return (
-    <Sidebar collapsible="icon" variant="floating" >
+    <Sidebar collapsible="icon" variant="floating" className="flex flex-col items-center justify-center" >
       <SidebarHeader />
-      <SidebarContent className={styles.sidebar}>
-        <SidebarGroup>
+      <SidebarContent className={cn(styles.sidebar,"px-2")}>
+        <SidebarGroup className={" shadow-md border border-gray-200 rounded-lg"}>
+          <SidebarGroupLabel style={{"fontSize":"1.3rem","color":"#888888"}}>Settings</SidebarGroupLabel>
+          <SidebarGroupContent>
+
+            {sidebarElements(settings)}
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup className={" border  border-gray-200 shadow-md rounded-lg"}>
           <SidebarGroupLabel style={{"fontSize":"1.3rem","color":"#888888"}}>Main Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
 
-            {tableElements}
+            {sidebarElements(tables)}
           </SidebarGroupContent>
         </SidebarGroup>
+        
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>

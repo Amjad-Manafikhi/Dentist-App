@@ -1,7 +1,7 @@
 // types-and-inputs.ts
 export type InputType ={
   name:string;
- type:  "text" | "number" | "date" | "checkbox" | "tel";
+  type:  "text" | "number" | "date" | "checkbox" | "tel";
 }
 // 1) S_M (patient–comorbidity)
 export const s_mInput:InputType[] = [
@@ -140,6 +140,11 @@ export const p_cInput:InputType[] = [
 
 ];  // alias for S_M
 
+export const noFormInput:InputType[]=[
+  
+]
+
+
 
 // ----------------------------------------------------------------------------
 // Map of table-name → its form-fields
@@ -163,4 +168,5 @@ export const inputMap = {
   s_s_c:          s_s_cInput,
   d_s:            d_sInput,
   p_c:            p_cInput,
+  noForm:         noFormInput
 };

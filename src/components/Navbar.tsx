@@ -4,7 +4,11 @@ import Link from "next/link";
 import  Cookies from 'js-cookie'
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-export const Navbar = () =>{
+type Props = {
+    isHomePage?:boolean;
+}
+
+export const Navbar = ({isHomePage}:Props) =>{
     const router= useRouter(); 
     
     
@@ -39,9 +43,9 @@ export const Navbar = () =>{
     
     console.log(loggedIn)
     return (
-        <div className=" w-[100%] h-12 bg-gray-50 shadow-sm rounded-md border border-gray-100 sticky top-2 flex flex-wrap justify-between px-16 items-center z-5">
+        <header className=" w-[100%] h-12 bg-gray-50 shadow-sm rounded-md border border-gray-100 sticky top-2 flex flex-wrap justify-between px-16 items-center z-5">
             <div className='flex gap-4'>
-                <SidebarTrigger/>
+                {!isHomePage && <SidebarTrigger/>}
                 <h2 className='text-lg'>Dental Education System</h2>
             </div>
             {!loggedIn && <div className="flex gap-2 ml-auto mr-5">
@@ -51,10 +55,10 @@ export const Navbar = () =>{
 
             {loggedIn&& <div className="flex gap-2 ml-auto mr-5">
                 <button className="underline" onClick={logout}>Log out</button>
-                <Link href="/profile" className="underline">profile</Link>
+                <Link href="/dashboard" className="underline">dashboard</Link>
             </div>}
            <FaTooth className='w-5 h-5' />
-        </div>
+        </header>
     )
 }
 export default Navbar 

@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import {studentInput} from './../components/FormInput';
 import Table from "@/components/Table";
 import { TableRow } from "@/models/Database";
+import Homepage from "@/components/HomePage";
 type Props ={
     student:TableRow[]
 }
@@ -42,19 +43,7 @@ export default function Student({student}:Props){
 
     return(
         <div className="min-h-screen">
-            <Layout head={studentInput}>
-
-                <main  className="pt-20 p-7  flex-grow">
-                    
-                    <Table 
-                        head={
-                            studentInput.map(input => input.name)
-                        }
-                        body={student}
-                        inputType={studentInput}
-                    /> 
-                </main>
-            </Layout>
+            <Homepage/>
         </div>
     ) 
 }
