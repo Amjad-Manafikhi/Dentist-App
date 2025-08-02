@@ -50,7 +50,6 @@ export function AppSidebar() {
       const value = Cookies.get('userRole') !== 'patient';
       setIsNotPatient(value);
   }, []);
-  const ok=true; 
   const tables = isNotPatient ? [
     { id: 1, title: "Course", url: "/dashboard/course", icon: FaBookOpen },
     { id: 2, title: "Student", url: "/dashboard/student", icon: FaUserGraduate },
