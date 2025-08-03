@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { deleteSession, getSession } from '@/lib/session';
+import { deleteSession } from '@/lib/session';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'DELETE') {
