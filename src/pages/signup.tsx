@@ -1,12 +1,10 @@
-import { useRouter } from 'next/router';
 import { FaTooth } from 'react-icons/fa';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import bcrypt from "bcryptjs"
-import Cookies from 'js-cookie'
 import toast, { Toaster } from 'react-hot-toast';
 import {
   Select,
