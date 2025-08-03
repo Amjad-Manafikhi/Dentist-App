@@ -15,7 +15,7 @@ export default async function handler(
       newRow.s_c_id === undefined ||
       newRow.supervisor_id === undefined 
     ) {
-      console.log(newRow)
+
       return res.status(400).json({ message: 'Missing S_S_C values' });
     }
 

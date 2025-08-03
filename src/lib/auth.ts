@@ -46,9 +46,7 @@ export async function signup(
     const { email, password, userRole, firstName, secondName } = credentials;
 
     try {
-        console.log("amajd");
         const users = await query ('select email from users where email=?', [email]) as Credentials[];
-        console.log(users);
         if (users.length > 0) {
             const error = new Error('this email is used before') as Error & {type:string};
             error.type = 'CredentialsSignup';

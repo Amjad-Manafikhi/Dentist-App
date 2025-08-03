@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   const tableName="doctor";
   if (req.method === 'GET') {
-    console.log("get")
+
     try {
       const doctor = await query(
         'SELECT * FROM patient'

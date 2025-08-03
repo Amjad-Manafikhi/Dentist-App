@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   const tableName="source type";
   if (req.method === 'GET') {
-    console.log("get")
+
     try {
       const sourceType = await query(
         'SELECT * FROM sourceType'

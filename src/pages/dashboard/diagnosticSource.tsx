@@ -13,7 +13,7 @@ const NEXT_PUBLIC_API_URL=process.env.NEXT_PUBLIC_API_URL;
 
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-    console.log("asdf")
+     
         const cookieHeader = context.req.headers.cookie || '';
         const cookies = parse(cookieHeader);
         const token = cookies.session;
@@ -50,7 +50,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
         
     
-      console.log('Server-side cookies:', cookies); // This will include HTTP-only cookies like "session"
       try{
           const res = await fetch(NEXT_PUBLIC_API_URL+'/api/diagnosticSource/read');
         if (!res.ok) {

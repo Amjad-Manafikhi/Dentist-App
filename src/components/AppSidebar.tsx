@@ -44,7 +44,6 @@ export function AppSidebar() {
   
   useEffect(() => {
         const doctor = Cookies.get('userRole') === 'doctor';
-        console.log("role",Cookies.get('userRole'))
         setIsDoctor(doctor);
     }, []);
   useEffect(() => {
@@ -52,8 +51,6 @@ export function AppSidebar() {
       setIsNotPatient(value);
   }, []);
 
-  console.log(isNotPatient);
-  console.log(isDoctor);
   const tables = isDoctor ? [
     { id: 1, title: "Course", url: "/dashboard/course", icon: FaBookOpen },
     { id: 2, title: "Student", url: "/dashboard/student", icon: FaUserGraduate },

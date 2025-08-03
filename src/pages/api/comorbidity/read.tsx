@@ -11,12 +11,10 @@ export default async function handler(
     const tableName="comorbidity";
 
   if (req.method === 'GET') {
-    console.log("get")
     try {
       const comorbidity = await query(
         'SELECT id, name FROM comorbidity'
       );
-      console.log(comorbidity)
       res.status(200).json(comorbidity as TableRow[]);
     } catch (error: unknown) {
         console.error(`Error creating ${tableName}:`, error);

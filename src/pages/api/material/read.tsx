@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   const tableName="material";
   if (req.method === 'GET') {
-    console.log("get")
+
     try {
       const material = await query(
         'SELECT * FROM material'

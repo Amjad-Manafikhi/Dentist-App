@@ -68,7 +68,6 @@ export default function NameUpdateForm() {
     setLoading(true);
     const oldPassword  = data.oldPassword;
     const nonHashedNewPassword  = data.newPassword;
-    console.log(oldPassword, nonHashedNewPassword, userId);
     const saltRounds=10;
     const newPassword= await bcrypt.hash(nonHashedNewPassword,saltRounds);
     const response = await fetch("/api/auth/users/updatePassword", {
@@ -76,7 +75,6 @@ export default function NameUpdateForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ oldPassword, newPassword, userId }),
     });
-    console.log(response)
 
     const result = await response.json();
     setLoading(false);

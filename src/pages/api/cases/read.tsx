@@ -11,7 +11,6 @@ export default async function handler(
   
 
   if (req.method === 'GET') {
-    console.log("get")
     try {
       const cases = await query(
         'SELECT * FROM `case`'

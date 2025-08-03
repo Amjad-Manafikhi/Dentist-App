@@ -54,7 +54,6 @@ function getInitialValues<T extends TableRow>(head: InputType[]): T { // Correct
     
     type TableKey = keyof typeof inputMap;
     const key = (lastSegment ?? 'patient') as TableKey;
-  console.log(lastSegment)
     return(
         <SidebarProvider>
             <AppSidebar />

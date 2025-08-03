@@ -60,13 +60,11 @@ export default function NameUpdateForm() {
   const onSubmit = async (data: FormSchemaType) => {
     setLoading(true);
     const { firstName, secondName } = data;
-    console.log(firstName, secondName, userId);
     const response = await fetch("/api/auth/users/updateName", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ firstName, secondName, userId }),
     });
-    console.log(response)
 
     const result = await response.json();
     setLoading(false);

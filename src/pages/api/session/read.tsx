@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   const tableName="session";
   if (req.method === 'GET') {
-    console.log("get")
+
     try {
       const session = await query(
         'SELECT * FROM session'

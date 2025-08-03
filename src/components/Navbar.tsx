@@ -21,7 +21,6 @@ export const Navbar = ({isHomePage}:Props) =>{
 
     async function logout() {
         try {
-            console.log("zxcvzxcv")
             const response = await fetch('/api/auth/logout', {
             method: 'DELETE',
             headers: {
@@ -41,7 +40,6 @@ export const Navbar = ({isHomePage}:Props) =>{
         }
 
     
-    console.log(loggedIn)
     return (
         <header className=" w-[100%] h-12 bg-gray-50 shadow-sm rounded-md border border-gray-100 sticky top-2 flex flex-wrap justify-between px-16 items-center z-5">
             <div className='flex gap-4'>

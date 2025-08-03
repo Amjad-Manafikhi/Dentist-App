@@ -44,7 +44,6 @@ export default function Form({tableInputs, idToEdit, formValues, setFormValues}:
             });
 
             const data = await res.json();
-            console.log(formValues)
 
             if (res.ok) {
                 router.reload();

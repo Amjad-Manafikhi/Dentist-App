@@ -8,7 +8,7 @@ export default async function handler(
   const tableName="doctor";
   if (req.method === 'DELETE') {
     const { id } = req.body;
-    console.log(id);
+
     if (!id) {
       return res.status(400).json({ message: 'Missing doctor ID' });
     }

@@ -60,14 +60,10 @@ function Element({element, head, inputType}:ElementProps) {
   const key = (lastSegment ?? 'patient') as TableKey;
 
   // Function to handle row deletion
-  console.log(router.pathname)
  async function handleDelete(id: number) {
   console.log('Deleting patient with ID:', id);
   try {
-    console.log(match)
-    console.log(lastSegment)
     const url=NEXT_PUBLIC_API_URL+'/api/' + lastSegment + '/delete';
-    console.log(url)
     const res = await fetch(url, {
       method: 'DELETE',
       headers: {

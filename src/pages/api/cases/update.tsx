@@ -23,7 +23,6 @@ export default async function handler(
 
     try {
       const { student_id, patient_id, d_s_id, toothache_id, isTreated} = newRow;
-      console.log(newRow)
       const result = await query(
       'UPDATE `case` SET student_id = ?, patient_id = ?, d_s_id = ?, toothache_id = ?, isTreated = ? WHERE id = ?',
       [student_id, patient_id, d_s_id, toothache_id, isTreated, id]

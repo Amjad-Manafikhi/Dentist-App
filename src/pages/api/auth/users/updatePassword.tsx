@@ -34,7 +34,6 @@ export default async function handler(
         throw error;
       }
 
-      console.log(oldPassword, newPassword, userId);
       const result = await query(
       'UPDATE users SET password = ? WHERE email = ?',
       [newPassword, userId]

@@ -9,7 +9,7 @@ export default async function handler(
 
   if (req.method === 'PUT') {
     const newRow = req.body.newRow;
-    console.log(newRow)
+   
     if (
       !newRow ||
       !newRow.name ||

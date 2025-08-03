@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 
 
 
@@ -54,7 +55,9 @@ type FormSchemaType = z.infer<typeof formSchema>;
 export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(""); 
-  const [userRole, setUserRole] = useState(""); 
+  const [userRole, setUserRole] = useState("");
+  
+  const router = useRouter();
   
 
   const {
@@ -86,17 +89,16 @@ export default function SignupPage() {
     });
     const result= await response.json();
     setLoading(false);
-    console.log(response)
     if (response.ok) {
         setError("");
         toast.success('Logged in Successfully!')
+        router.push("/dashboard")
     } else {
         setError(result.error || "somthing went wrong");
         toast.error(result.error);
 
     }
   };
-console.log(userRole);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">

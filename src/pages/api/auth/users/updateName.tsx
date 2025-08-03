@@ -11,7 +11,6 @@ export default async function handler(
 
     try {
       const { firstName, secondName, userId} = req.body;
-      console.log(firstName, secondName, userId);
       const result = await query(
       'UPDATE users SET firstName = ?, secondName = ? WHERE email = ?',
       [firstName, secondName, userId]

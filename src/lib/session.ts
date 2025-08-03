@@ -51,7 +51,6 @@ export async function createSession(res: NextApiResponse, userId: string, userRo
         path: '/',
         maxAge: 60 * 60 * 24 * 7,
       }) 
-console.log(userRole);
   const role =serialize('userRole', userRole, {
         httpOnly: false,
         path: '/',
@@ -81,7 +80,6 @@ export function deleteSession(res: NextApiResponse) {
 // Retrieve and verify the session from the request
 export async function getSession(req: NextApiRequest): Promise<SessionPayload | null> {
   const cookies = parse(req.headers.cookie || '');
-  console.log('Session cookie:', cookies.session); 
   const token = cookies.session;
 
   if (!token) return null;

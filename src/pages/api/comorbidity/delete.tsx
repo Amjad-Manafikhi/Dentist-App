@@ -9,7 +9,6 @@ export default async function handler(
 
   if (req.method === 'DELETE') {
     const { id } = req.body;
-    console.log(id);
     if (!id) {
       return res.status(400).json({ message: 'Missing comorbidity ID' });
     }

@@ -6,15 +6,16 @@ import {z} from "zod"
 import toast, { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 
 
     export const getServerSideProps: GetServerSideProps = async (context) => {
         const isLoggedIn = context.req.cookies.loggedIn === 'true'; 
-
+        
         if (isLoggedIn) {
             return {
             redirect: {
-                destination: '/', 
+                destination: '/dashboard', 
                 permanent: false, 
             },
             };
@@ -33,6 +34,9 @@ export default function LoginPage() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    const router=useRouter();
     
     const formSchema = z
       .object({
@@ -62,10 +66,11 @@ export default function LoginPage() {
     })
       const result= await response.json();
       setLoading(false);
-      console.log(response)
       if (response.ok) {
         setError("");
+        setLoggedIn(true);
         toast.success('Logged in Successfully!')
+        router.push("/dashboard")
       } else {
           setError(result.error || "Somthing Went Wrong")
           toast.error(result.error);
@@ -107,6 +112,7 @@ export default function LoginPage() {
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <p className='text-[12px] text-gray-500'>Don&apos;t have an account ? <Link className="underline text-[#0000EE]" href="/signup">Create Account</Link></p>
         <button
+          disabled={loggedIn}
           type="submit"
           className="bg-gradient-to-b from-black to-gray-800 w-26 h-10 text-gray-200 rounded-md m-auto mt-4 cursor-pointer"
         >

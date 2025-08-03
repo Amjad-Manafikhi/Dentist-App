@@ -9,7 +9,7 @@ export default async function handler(
   if (req.method === 'POST') {
     const newRow = req.body.newRow;
     const { id } = req.body;
-    console.log(newRow)
+
     if (
       !newRow ||
       !newRow.name ||
