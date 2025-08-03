@@ -60,7 +60,7 @@ function getInitialValues<T extends TableRow>(head: InputType[]): T { // Correct
             <AppSidebar />
             <main className=" w-full m-auto">
               <Navbar/> 
-                <div className={`flex flex-col min-h-screen `}>
+                <div className={`flex flex-col min-h-screen px-10 `}>
                     <div className="flex flex-col w-full">
                         <div className="flex flex-col mt-10 ml-10">
                           <h2 className="text-xl font-extrabold"> {lastSegment ?  lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) : null} Management </h2>

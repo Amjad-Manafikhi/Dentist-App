@@ -44,12 +44,16 @@ export function AppSidebar() {
   
   useEffect(() => {
         const doctor = Cookies.get('userRole') === 'doctor';
+        console.log("role",Cookies.get('userRole'))
         setIsDoctor(doctor);
     }, []);
   useEffect(() => {
       const value = Cookies.get('userRole') !== 'patient';
       setIsNotPatient(value);
   }, []);
+
+  console.log(isNotPatient);
+  console.log(isDoctor);
   const tables = isNotPatient ? [
     { id: 1, title: "Course", url: "/dashboard/course", icon: FaBookOpen },
     { id: 2, title: "Student", url: "/dashboard/student", icon: FaUserGraduate },
@@ -72,10 +76,9 @@ export function AppSidebar() {
 
   ]: [];
 
-  const settings = isDoctor ? [
+  const settings = [
     { id: 1, title: "Profile", url: "/dashboard", icon: FaUserTie },
-    { id: 2, title: "Website", url: "/dashboard/website", icon: FaUserTie },
-  ] : [{ id: 1, title: "Profile", url: "/dashboard", icon: FaUserTie },]
+  ]
 
 
   function sidebarElements(elements:SidebarElement[]){ 
@@ -108,8 +111,8 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon" variant="floating" className="flex flex-col items-center justify-center" >
       <SidebarHeader />
-      <SidebarContent className={cn(styles.sidebar,"px-2")}>
-        <SidebarGroup className={" shadow-md border border-gray-200 rounded-lg"}>
+      <SidebarContent className={cn(styles.sidebar,"")}>
+        <SidebarGroup className={" shadow-md border w-[94%] m-auto border-gray-200 rounded-lg"}>
           <SidebarGroupLabel style={{"fontSize":"1.3rem","color":"#888888"}}>Settings</SidebarGroupLabel>
           <SidebarGroupContent>
 
@@ -117,13 +120,14 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup className={" border  border-gray-200 shadow-md rounded-lg"}>
-          <SidebarGroupLabel style={{"fontSize":"1.3rem","color":"#888888"}}>Main Navigation</SidebarGroupLabel>
-          <SidebarGroupContent>
+          {tables.length > 0 && <SidebarGroup className={" w-[94%] m-auto border  border-gray-200 shadow-md rounded-lg"}>
+            <SidebarGroupLabel style={{"fontSize":"1.3rem","color":"#888888"}}>Main Navigation</SidebarGroupLabel>
+            <SidebarGroupContent>
 
-            {sidebarElements(tables)}
-          </SidebarGroupContent>
-        </SidebarGroup>
+              {sidebarElements(tables)}
+            </SidebarGroupContent>
+          </SidebarGroup>
+        }
         
       </SidebarContent>
       <SidebarFooter />

@@ -12,10 +12,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const email = req.body.email;
     const password = req.body.password;
     const userRole = req.body.userRole;
+    const firstName = req.body.firstName;
+    const secondName = req.body.secondName;
     console.log(email, password)
 
     try {
-        const user = await signup('credentials', { email, password, userRole });
+        const user = await signup('credentials', { email, password, userRole, firstName, secondName });
 
         // Set a session using real user ID
         await createSession(res, user.email, userRole);

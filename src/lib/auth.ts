@@ -5,6 +5,8 @@ type Credentials = {
   email: string;
   password: string;
   userRole:string;
+  firstName:string;
+  secondName:string;
 };
 
 export async function signIn(
@@ -41,7 +43,7 @@ export async function signup(
    provider: 'credentials',
    credentials: Credentials
 ){
-    const { email, password, userRole } = credentials;
+    const { email, password, userRole, firstName, secondName } = credentials;
 
     try {
         console.log("amajd");
@@ -52,7 +54,7 @@ export async function signup(
             error.type = 'CredentialsSignup';
             throw error;
         }
-        await query('insert into users (email, password, role) values (?, ?, ?)',[email, password, userRole]);
+        await query('insert into users (email, password, role, firstName, secondName) values (?, ?, ?, ?, ?)',[email, password, userRole, firstName, secondName]);
         return credentials;
     
     } catch (error) {

@@ -20,6 +20,8 @@ const formSchema = z
     email: z.string().email(),
     password: z.string().min(8, 'Password should be at least 8 characters'),
     confirmPassword: z.string(),
+    firstName: z.string().min(1," This field is required"),
+    secondName: z.string().min(1," This field is required"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords must match',
@@ -51,14 +53,16 @@ export default function SignupPage() {
     setLoading(true);
     const email = data.email;
     const nonHashwedPassword = data.password;
+    const firstName = data.firstName;
+    const secondName = data.secondName;
+    
     const saltRounds=10;
     const password= await bcrypt.hash(nonHashwedPassword,saltRounds);
-    console.log("qwerqwer")
-    console.log(password)
+
     const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, userRole }),
+        body: JSON.stringify({ email, password, userRole, firstName, secondName }),
     });
     const result= await response.json();
     setLoading(false);
@@ -73,7 +77,7 @@ export default function SignupPage() {
 
     }
   };
-
+console.log(userRole);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">
@@ -86,6 +90,26 @@ export default function SignupPage() {
         <div className="flex justify-between">
           <h1 className="">Dental Education System</h1>
           <FaTooth className="w-5 h-5" />
+        </div>
+        <div className='flex flex-col'>
+            <input
+            type="text"
+            placeholder="First Name"
+            className="bg-white p-2 rounded-md"
+            {...register('firstName')}
+            
+            />
+            {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
+        </div>
+        <div className='flex flex-col'>
+            <input
+            type="text"
+            placeholder="Second Name"
+            className="bg-white p-2 rounded-md"
+            {...register('secondName')}
+            
+            />
+            {errors.secondName && <p className="text-red-500 text-sm">{errors.secondName.message}</p>}
         </div>
         <div className='flex flex-col'>
             <input
@@ -124,9 +148,9 @@ export default function SignupPage() {
                     <SelectValue placeholder="Create Account as a"/>
                 </SelectTrigger>
                 <SelectContent className='bg-gray-200 border-1'>
-                    <SelectItem value="doctor">Doctor</SelectItem>
-                    <SelectItem value="student">Student</SelectItem>
-                    <SelectItem value="patient">Patient</SelectItem>
+                    <SelectItem className="hover:bg-gray-400 cursor-pointer" value="doctor">Doctor</SelectItem>
+                    <SelectItem className="hover:bg-gray-400 cursor-pointer" value="student">Student</SelectItem>
+                    <SelectItem className="hover:bg-gray-400 cursor-pointer" value="patient">Patient</SelectItem>
                 </SelectContent>
             </Select>
         </div>

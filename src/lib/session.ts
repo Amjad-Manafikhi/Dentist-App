@@ -39,7 +39,7 @@ export async function createSession(res: NextApiResponse, userId: string, userRo
   const token = await encrypt({ userId, expiresAt });
 
   const cookie = serialize('session', token, {
-    httpOnly: true,
+    httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
     maxAge: 60 * 60 * 24 * 7,
     path: '/',
@@ -51,8 +51,8 @@ export async function createSession(res: NextApiResponse, userId: string, userRo
         path: '/',
         maxAge: 60 * 60 * 24 * 7,
       }) 
-
-  const role =serialize('isDoctor', userRole, {
+console.log(userRole);
+  const role =serialize('userRole', userRole, {
         httpOnly: false,
         path: '/',
         maxAge: 60 * 60 * 24 * 7,
