@@ -15,7 +15,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { GetServerSideProps } from 'next';
 
+
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+        const isLoggedIn = context.req.cookies.loggedIn === 'true'; 
+
+        if (isLoggedIn) {
+            return {
+            redirect: {
+                destination: '/', 
+                permanent: false, 
+            },
+            };
+        }
+
+        return {
+            props: {}, 
+        };
+    };
 
 
 
@@ -35,16 +54,10 @@ const formSchema = z
 type FormSchemaType = z.infer<typeof formSchema>;
 
 export default function SignupPage() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(""); 
   const [userRole, setUserRole] = useState(""); 
   
-
-    useEffect(() => {
-        const isLogged = Cookies.get('loggedIn') === 'true';
-        if(isLogged){router.push('/')};
-    }, []);
 
   const {
     register,
@@ -79,7 +92,6 @@ export default function SignupPage() {
     if (response.ok) {
         setError("");
         toast.success('Logged in Successfully!')
-        router.push('/dashboard');
     } else {
         setError(result.error || "somthing went wrong");
         toast.error(result.error);
