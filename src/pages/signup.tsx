@@ -79,7 +79,7 @@ export default function SignupPage() {
     if (response.ok) {
         setError("");
         toast.success('Logged in Successfully!')
-        router.push('/dashboard/course');
+        router.push('/dashboard');
     } else {
         setError(result.error || "somthing went wrong");
         toast.error(result.error);

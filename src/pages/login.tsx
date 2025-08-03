@@ -50,7 +50,7 @@ export default function LoginPage() {
       if (response.ok) {
         setError("");
         toast.success('Logged in Successfully!')
-        router.push('/dashboard/course');
+        router.push('/dashboard');
       } else {
           setError(result.error || "Somthing Went Wrong")
           toast.error(result.error);
