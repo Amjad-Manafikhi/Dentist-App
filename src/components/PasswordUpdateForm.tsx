@@ -130,6 +130,7 @@ export default function NameUpdateForm() {
           <p className="text-red-500 text-sm">{errors.confirmNewPassword.message}</p>
         )}
       </div>
+      {error && <p className="text-red-500 text-sm">{error}</p>}
       <button
         type="submit"
         className="bg-gradient-to-b from-black to-gray-800 w-46 h-10 text-gray-200 rounded-md m-auto mt-4 cursor-pointer"
