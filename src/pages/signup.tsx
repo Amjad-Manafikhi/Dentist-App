@@ -3,9 +3,10 @@ import { FaTooth } from 'react-icons/fa';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import bcrypt from "bcryptjs"
+import Cookies from 'js-cookie'
 import toast, { Toaster } from 'react-hot-toast';
 import {
   Select,
@@ -14,6 +15,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+
+
+
 
 const formSchema = z
   .object({
@@ -35,7 +39,12 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(""); 
   const [userRole, setUserRole] = useState(""); 
-  console.log(userRole)
+  
+
+    useEffect(() => {
+        const isLogged = Cookies.get('loggedIn') === 'true';
+        if(isLogged){router.push('/')};
+    }, []);
 
   const {
     register,

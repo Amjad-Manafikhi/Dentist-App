@@ -54,7 +54,7 @@ export async function signup(
             error.type = 'CredentialsSignup';
             throw error;
         }
-        await query('insert into users (email, password, role, firstName, secondName) values (?, ?, ?, ?, ?)',[email, password, userRole, firstName, secondName]);
+        await query('insert into users (email, password, userRole, firstName, secondName) values (?, ?, ?, ?, ?)',[email, password, userRole, firstName, secondName]);
         return credentials;
     
     } catch (error) {

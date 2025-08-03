@@ -17,11 +17,21 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
         const cookieHeader = context.req.headers.cookie || '';
         const cookies = parse(cookieHeader);
         const token = cookies.session;
+        const userRole = cookies.userRole;
 
         if (!token) {
             return {
             redirect: {
                 destination: '/signup',
+                permanent: false,
+            },
+            };
+        }
+
+        if(userRole!=="doctor"){
+            return {
+            redirect: {
+                destination: '/',
                 permanent: false,
             },
             };

@@ -54,7 +54,7 @@ export function AppSidebar() {
 
   console.log(isNotPatient);
   console.log(isDoctor);
-  const tables = isNotPatient ? [
+  const tables = isDoctor ? [
     { id: 1, title: "Course", url: "/dashboard/course", icon: FaBookOpen },
     { id: 2, title: "Student", url: "/dashboard/student", icon: FaUserGraduate },
     { id: 3, title: "Patient", url: "/dashboard/patient", icon: FaUserInjured },
@@ -74,7 +74,11 @@ export function AppSidebar() {
     { id: 17, title: "S_S_C", url: "/dashboard/s_s_c", icon: FaUserTie },
     { id: 18, title: "S_S", url: "/dashboard/s_s", icon: FaUserTie },
 
-  ]: [];
+  ]: isNotPatient ? [
+    { id: 1, title: "Case", url: "/dashboard/cases", icon: FaFolderOpen },
+    { id: 2, title: "Session", url: "/dashboard/session", icon: FaClock },
+    { id: 3, title: "S_M", url: "/dashboard/s_m", icon: FaUserTie },
+  ]:[];
 
   const settings = [
     { id: 1, title: "Profile", url: "/dashboard", icon: FaUserTie },
@@ -109,10 +113,10 @@ export function AppSidebar() {
       }
 
   return (
-    <Sidebar collapsible="icon" variant="floating" className="flex flex-col items-center justify-center" >
+    <Sidebar collapsible="icon" variant="floating" className="flex flex-col justify-start items-start" >
       <SidebarHeader />
       <SidebarContent className={cn(styles.sidebar,"")}>
-        <SidebarGroup className={" shadow-md border w-[94%] m-auto border-gray-200 rounded-lg"}>
+        <SidebarGroup className={" shadow-md border w-[94%] mx-auto border-gray-200 rounded-lg"}>
           <SidebarGroupLabel style={{"fontSize":"1.3rem","color":"#888888"}}>Settings</SidebarGroupLabel>
           <SidebarGroupContent>
 
@@ -120,7 +124,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-          {tables.length > 0 && <SidebarGroup className={" w-[94%] m-auto border  border-gray-200 shadow-md rounded-lg"}>
+          {tables.length > 0 && <SidebarGroup className={" w-[94%] mx-auto border  border-gray-200 shadow-md rounded-lg"}>
             <SidebarGroupLabel style={{"fontSize":"1.3rem","color":"#888888"}}>Main Navigation</SidebarGroupLabel>
             <SidebarGroupContent>
 

@@ -26,6 +26,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
             },
             };
         }
+        const userRole = cookies.userRole
+        if(userRole!=="doctor"){
+            return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+            };
+        }
 
         const session = await decrypt(token);
 

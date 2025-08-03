@@ -1,23 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { FaTooth } from 'react-icons/fa'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {z} from "zod"
 import toast, { Toaster } from 'react-hot-toast';
- 
+ import Cookies from 'js-cookie'
 export default function LoginPage() {
+    
 
-
-  const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-  
+    
+    const router = useRouter();
+    useEffect(() => {
+        const isLogged = Cookies.get('loggedIn') === 'true';
+        if(isLogged){router.push('/')};
+    }, []);
     const formSchema = z
       .object({
         email: z.string().email(),
         password: z.string().min(8, 'Password should be at least 8 characters'),
       })
+      
       
     
     type FormSchemaType = z.infer<typeof formSchema>;

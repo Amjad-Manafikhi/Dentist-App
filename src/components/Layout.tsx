@@ -54,7 +54,7 @@ function getInitialValues<T extends TableRow>(head: InputType[]): T { // Correct
     
     type TableKey = keyof typeof inputMap;
     const key = (lastSegment ?? 'patient') as TableKey;
-
+  console.log(lastSegment)
     return(
         <SidebarProvider>
             <AppSidebar />
@@ -62,16 +62,16 @@ function getInitialValues<T extends TableRow>(head: InputType[]): T { // Correct
               <Navbar/> 
                 <div className={`flex flex-col min-h-screen px-10 `}>
                     <div className="flex flex-col w-full">
-                        <div className="flex flex-col mt-10 ml-10">
+                        { lastSegment!=="dashboard" && <div className="flex flex-col mt-10 ml-10">
                           <h2 className="text-xl font-extrabold"> {lastSegment ?  lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) : null} Management </h2>
                           <h2 className="text-lg ">Manage dental education {lastSegment}s and curriculum</h2>
-                        </div>
+                        </div>}
                         {children}
                 </div>
-                <button 
+                {lastSegment !=="dashboard" && <button 
                     onClick={()=>setFormOpen(prev=>!prev)}
                     className=" m-6 ml-auto bg-[#2563EB] rounded-md px-4 py-2 text-sm font-bold items-center justify-center text-primary cursor-pointer "
-                >+ Add {lastSegment}</button>
+                >+ Add {lastSegment}</button>}
                 {formOpen && 
                 <Modal open={formOpen} setOpen={setFormOpen} addRow={true}>
                     <Form tableInputs={inputMap[key]}   formValues={editFormValues} setFormValues={setEditFormValues}/>  
