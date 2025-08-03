@@ -35,14 +35,7 @@ const Homepage = () => {
             Receive professional dental treatment while supporting the education of tomorrow&apos;s dental professionals. 
             Our supervised student clinic provides high-quality care at accessible rates.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-              Schedule Appointment
-            </Button>
-            <Button size="lg" variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-50">
-              Learn More
-            </Button>
-          </div>
+          
         </div>
       </section>
 
@@ -215,11 +208,6 @@ const Homepage = () => {
             </div>
           </div>
 
-          <div className="text-center mt-12">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-              Schedule Your Appointment Today
-            </Button>
-          </div>
         </div>
       </section>
 
