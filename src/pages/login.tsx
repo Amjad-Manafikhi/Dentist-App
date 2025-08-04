@@ -79,6 +79,7 @@ export default function LoginPage() {
  
   return (
     <div className='flex w-screen h-screen justify-center items-center'>
+        <Link href={"/"} className='fixed top-4 left-4'>&larr; back to home</Link>
         <div><Toaster/></div>
         <form
         noValidate={true}

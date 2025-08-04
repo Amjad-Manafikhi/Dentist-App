@@ -93,7 +93,7 @@ export default function NameUpdateForm() {
     <form
       noValidate
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col w-[400px] bg-gray-200 rounded-md px-3 py-4 gap-4"
+      className="flex flex-col w-full bg-gray-200 rounded-md px-3 py-4 gap-4"
     >
       <div className="flex flex-col">
         <input
